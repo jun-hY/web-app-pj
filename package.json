@@ -3,6 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "echo 'no build script'"
+    "build": "echo 'no build script'",
+    "start": "node server.js"
+  },
+  "description": "> 영남이공대학교 2학년 1학기 웹프로그래밍응용 강의 실습 프로젝트",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jun-hY/web-app-pj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jun-hY/web-app-pj/issues"
+  },
+  "homepage": "https://github.com/jun-hY/web-app-pj#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.16",
+    "typescript": "^5.8.3"
   }
 }
