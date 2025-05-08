@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/jun-hY/web-app-pj#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
