@@ -1,0 +1,7 @@
+services:
+  code-review:
+    build: .
+    ports:
+      - "5000:8080"
+    container_name: code-review
+    image: web-app:latest
