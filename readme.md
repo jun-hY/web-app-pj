@@ -16,6 +16,7 @@
 - typescript
 - sqlite3
 - crypto
+- axios
 
 ___
 
