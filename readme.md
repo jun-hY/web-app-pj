@@ -12,13 +12,13 @@
 
 ➡️사용 라이브러리
 
-    - express
-    - typescript
-    - sqlite3
-    - crypto
+- express
+- typescript
+- sqlite3
+- crypto
 
 ___
 
 ➡️데이터베이스
 
-    - sqlite3
+- sqlite3
