@@ -54,10 +54,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   reviewBtn.addEventListener("click", () => {
     const code = codeInput.value.trim()
+    console.log(code)
     if (!code) {
       alert("코드를 입력해주세요.")
       return
     }
+    
+    fetch('http://localhost:8080/', {
+        method: 'POST', // HTTP 메서드
+        headers: {
+          'Content-Type': 'application/json' // 요청 본문 타입
+        },
+        'body': JSON.stringify({
+          code: code,
+        })
+    })
+
 
     // 로딩 표시
     loadingIndicator.style.display = "flex"
