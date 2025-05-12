@@ -2,7 +2,7 @@ import express, { Request, Response, Express } from 'express';
 import { init } from './db/query';
 import path from 'path';
 import { reqReview } from './api/reviewApi';
-import { parseReviewData, queryReview, saveReview, view } from './services/reviewService';
+import { parseReviewData, queryReview, saveReview } from './services/reviewService';
 
 const PORT: number = 8080;
 const app: Express = express();
