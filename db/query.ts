@@ -33,8 +33,14 @@ export const connectDB = async () => {
         await db.run('INSERT INTO reviews (id, issues, improvements, scores, summary, improved_code) VALUES(?, ?, ?, ?, ?, ?) ', [id, JSON.stringify(issues), JSON.stringify(improvements), JSON.stringify(scores), summary, improved_code])
     }
 
+    const deleteReview = async (id: string): Promise<boolean> => {
+        const result = await db.run('DELETE FROM reviews WHERE id=?', [id])
+        return result.changes !== 0;
+    }
+
     return {
         getReview,
-        createReview
+        createReview,
+        deleteReview
     }
 }
