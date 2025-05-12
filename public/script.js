@@ -59,18 +59,27 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("코드를 입력해주세요.")
       return
     }
-    
+
     fetch('http://localhost:8080/', {
-        method: 'POST', // HTTP 메서드
-        headers: {
-          'Content-Type': 'application/json' // 요청 본문 타입
-        },
-        'body': JSON.stringify({
-          code: code,
-        })
-    }).then((res) => {
-      console.log(res)
-    })
+      method: 'POST', // HTTP 메서드
+      headers: {
+        'Content-Type': 'application/json' // 요청 본문 타입
+      },
+      'body': JSON.stringify({
+        code: code,
+      })
+    }).then((res) => res.json())
+      .then((data) => {
+        if (data.redirect) {
+          localStorage.setItem('reviews', data.redirect.slice(5));
+          location.href = data.redirect;
+        } else {
+          console.error("경로 없음: ", data);
+        }
+      })
+      .catch(err => {
+        console.error("요청 실패: ", err);
+      });
 
 
     // 로딩 표시
