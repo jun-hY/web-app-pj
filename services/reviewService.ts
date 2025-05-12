@@ -12,14 +12,6 @@ export const parseReviewData = (data: string) => {
     }
 }
 
-export const view = (jsonData: Record<string, any>) => {
-    console.log(jsonData.issues)
-    console.log(jsonData.improvements)
-    console.log(jsonData.scores)
-    console.log(jsonData.summary)
-    console.log(jsonData.improved_code)
-}
-
 export const saveReview = async (jsonData: Record<string, any>) => {
     const db = await connectDB();
     const id = randomBytes(20).toString('hex')
