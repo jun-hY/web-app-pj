@@ -7,10 +7,10 @@ export const init = async () => {
     // db.exec()를 사용하여 비동기적으로 쿼리 실행
     await db.exec(`
         CREATE TABLE IF NOT EXISTS reviews (
-            id INTEGER PRIMARY KEY,
-            advantage TEXT NOT NULL,
-            improve TEXT NOT NULL,
-            point TEXT NOT NULL,
+            id TEXT PRIMARY KEY,
+            issues TEXT NOT NULL,
+            improvements TEXT NOT NULL,
+            scores TEXT NOT NULL,
             summary TEXT NOT NULL,
             improved_code TEXT NOT NULL
         )
@@ -23,14 +23,14 @@ export const connectDB = async () => {
     const db = await initDB();
 
     const getReview = async (id: string) => {
-        return await db.get('SELECT * FROM reviews WHERE id = ?', id)
+        return await db.get('SELECT * FROM reviews WHERE id = ?', [id])
     }
 
-    const createReview = async (id: string) => {
+    const createReview = async (id: string, { issues, improvements, scores, summary, improved_code }: Record<string, any>) => {
         if (await getReview(id)) {
             return
         }
-        await db.run('INSERT INTO boards (id, advantage, improve, point, summary, improved_code) VALUES(?, ?, ?, ?, ?, ?) ', [])
+        await db.run('INSERT INTO reviews (id, issues, improvements, scores, summary, improved_code) VALUES(?, ?, ?, ?, ?, ?) ', [id, JSON.stringify(issues), JSON.stringify(improvements), JSON.stringify(scores), summary, improved_code])
     }
 
     return {
