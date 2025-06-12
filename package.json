@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "echo 'no build script'",
-    "start": "node server.js"
+    "build": "npx tsc",
+    "start": "nodemon server.js"
   },
   "description": "> 영남이공대학교 2학년 1학기 웹프로그래밍응용 강의 실습 프로젝트",
   "main": "server.js",
@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/jun-hY/web-app-pj#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pug": "^3.0.3"
   },
   "devDependencies": {
     "@types/axios": "^0.9.36",
@@ -29,8 +30,10 @@
     "@types/sqlite3": "^3.1.11",
     "axios": "^1.9.0",
     "crypto": "^1.0.1",
+    "nodemon": "^3.1.10",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
 }

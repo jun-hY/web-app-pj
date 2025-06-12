@@ -1,0 +1,95 @@
+doctype html
+html(lang="ko")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title AI 코드 리뷰 시스템
+    link(rel="stylesheet", href="style.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js")
+  body
+    .app-container
+      header.header
+        .logo
+          svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", class="lucide lucide-code")
+            polyline(points="16 18 22 12 16 6")
+            polyline(points="8 6 2 12 8 18")
+          h1 AI 코드 리뷰
+        .theme-toggle
+          button#theme-toggle-btn
+            svg(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", class="lucide lucide-moon")
+              path(d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z")
+
+      main.main-content
+        .sidebar
+          .sidebar-header
+            h3 리뷰 히스토리
+            button#new-review-btn.btn.btn-small + 새 리뷰
+          #history-list.history-list
+            //- 히스토리 항목들이 여기에 추가됩니다
+
+        .content
+          .code-input-section
+            .section-header
+              h2 코드 입력
+              //- .language-selector
+              //-   select#language-select
+              //-     option(value="javascript") JavaScript
+              //-     option(value="python") Python
+              //-     option(value="java") Java
+              //-     option(value="csharp") C#
+              //-     option(value="cpp") C++
+              //-     option(value="go") Go
+              //-     option(value="rust") Rust
+              //-     option(value="typescript") TypeScript
+            .code-editor-container
+              textarea#code-input(placeholder="여기에 코드를 입력하세요...")
+            button#review-btn.btn.btn-primary 코드 리뷰 요청
+
+          .review-result-section
+            .section-header
+              h2 리뷰 결과
+              .actions
+                button#copy-result-btn.btn.btn-small 복사
+                button#save-result-btn.btn.btn-small 저장
+            #loading-indicator.loading-indicator
+              .spinner
+              p AI가 코드를 분석 중입니다...
+            #review-result.review-result
+              .result-summary
+                .score-card
+                  h4 전체 점수
+                  .score -
+                .score-card
+                  h4 성능
+                  .score -
+                .score-card
+                  h4 보안
+                  .score -
+                .score-card
+                  h4 가독성
+                  .score -
+              .result-details
+                .tab-header
+                  button.tab-btn.active(data-tab="summary") 요약
+                  button.tab-btn(data-tab="issues") 문제점
+                  button.tab-btn(data-tab="suggestions") 개선 제안
+                  button.tab-btn(data-tab="improved-code") 개선된 코드
+                .tab-content
+                  #summary-tab.tab-pane.active
+                    p 코드 리뷰 요청 후 결과가 여기에 표시됩니다.
+                  #issues-tab.tab-pane
+                    ul.issues-list
+                      //- 문제점 목록이 여기에 표시됩니다
+                  #suggestions-tab.tab-pane
+                    ul.suggestions-list
+                      //- 제안 목록이 여기에 표시됩니다
+                  #improved-code-tab.tab-pane
+                    pre
+                      code.improved-code // 개선된 코드가 여기에 표시됩니다
+
+      footer.footer
+        p 
+          | © 2025 AI 코드 리뷰 시스템 
+          
+    script(src="/script.js")

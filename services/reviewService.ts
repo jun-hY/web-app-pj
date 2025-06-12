@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto"
 import { connectDB } from "../db/query"
 
-export const parseReviewData = (data: string) => {
+export const parseReview = (data: string) => {
     try {
         const jsonData = JSON.parse(data.split('\`\`\`')[1].replace('json\n', ''))
         if (jsonData) {
@@ -13,6 +13,9 @@ export const parseReviewData = (data: string) => {
 }
 
 export const saveReview = async (jsonData: Record<string, any>) => {
+    if (!jsonData) {
+        return
+    }
     const db = await connectDB();
     const id = randomBytes(20).toString('hex')
     db.createReview(id, jsonData)
