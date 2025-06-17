@@ -13,7 +13,8 @@ export const init = async () => {
             improvements TEXT NOT NULL,
             scores TEXT NOT NULL,
             summary TEXT NOT NULL,
-            improved_code TEXT NOT NULL
+            improved_code TEXT NOT NULL,
+            origin_code TEXT NOT NULL
         )
     `);
 
@@ -31,7 +32,8 @@ export const connectDB = async () => {
         if (await getReview(id)) {
             return
         }
-        await db.run('INSERT INTO reviews (id, issues, improvements, scores, summary, improved_code) VALUES(?, ?, ?, ?, ?, ?) ', [id, JSON.stringify(jsonData.issues), JSON.stringify(jsonData.improvements), JSON.stringify(jsonData.scores), jsonData.summary, jsonData.improved_code])
+        const result = await db.run('INSERT INTO reviews (id, issues, improvements, scores, summary, improved_code, origin_code) VALUES(?, ?, ?, ?, ?, ?, ?) ', [id, JSON.stringify(jsonData.issues), JSON.stringify(jsonData.improvements), JSON.stringify(jsonData.scores), jsonData.summary, jsonData.improved_code, jsonData.origin_code])
+        return id;
     }
 
     const deleteReview = async (id: string): Promise<boolean> => {

@@ -2,7 +2,8 @@ import express, { Request, Response, Express } from 'express';
 import { init } from './db/query';
 import path from 'path';
 import { reqReview } from './api/reviewApi';
-import { parseReview, queryReview, saveReview } from './services/reviewService';
+import { deleteReview, parseReview, queryReview, saveReview } from './services/reviewService';
+import { error } from 'console';
 
 const PORT: number = 8080;
 const app: Express = express();
@@ -13,28 +14,50 @@ app.set('view engine', 'pug')
 app.set('views', '')
 
 app.get('/', async (req: Request, res: Response) => {
-    res.render('index');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.post('/', async (req: Request, res: Response) => {
-    const reviewId = req.body.id;
+    const submitCode = req.body.code;
+    try {
+        let reviewJson: JSON | undefined
+        do {
+            reviewJson = parseReview((await reqReview(submitCode)).choices[0].message.content, submitCode);
+        } while (!reviewJson);
+        const reviewId = await saveReview(reviewJson);
+        const review = await queryReview(reviewId.toString());
+        res.status(200).json(review);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error: can't send to ai api");
+    }
+});
+
+app.get('/getReview', async (req: Request, res: Response) => {
+    const reviewId = req.query.id;
     if (reviewId) {
         try {
             const review = await queryReview(reviewId.toString());
             res.status(200).json(review);
         } catch {
-            res.status(500).send("Error: can not found id")
+            res.status(500).send("Error: can not found id");
         }
-    } else if (req.body.code) {
+    } else {
+        res.status(400).send("Error: parameter is undefined");
+    }
+});
+
+app.delete('/deleteReview', async (req: Request, res: Response) => {
+    const reviewId = req.query.id;
+    if (reviewId) {
         try {
-            const reviewData = await reqReview(req.body.code)
-            const reviewJson = parseReview(reviewData.choices[0].message.content)
-            const reviewId = await saveReview(reviewJson)
-            res.status(200).json({ redirect: `${reviewId}` });
+            const result = deleteReview(reviewId.toString());
         } catch (err) {
-            console.error(err)
-            res.status(500).send("Error: can't send to ai api")
+            res.status(500).send("Error : id not found");
         }
+        res.status(200).send("delete successfully");
+    } else {
+        res.status(400).send("Error: parameter is undefined")
     }
 });
 

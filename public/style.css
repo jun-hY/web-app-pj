@@ -101,12 +101,13 @@ body {
 
 /* 사이드바 스타일 */
 .sidebar {
-  width: 250px;
+  max-width: 250px;
   background-color: var(--sidebar-background);
   border-right: 1px solid var(--border-color);
   padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .sidebar-header {
@@ -127,6 +128,7 @@ body {
   margin-bottom: 0.5rem;
   cursor: pointer;
   border: 1px solid transparent;
+  position: relative;
 }
 
 .history-item:hover {
@@ -137,6 +139,72 @@ body {
 .history-item.active {
   background-color: var(--primary-color);
   color: white;
+}
+
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.history-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.history-item-snippet {
+  width: 100%;
+  font-size: 0.875rem;
+  overflow: hidden;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+  font-family: "Fira Code", "Courier New", Courier, monospace;
+}
+
+.history-item-score {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.history-item-actions {
+  display: flex;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.history-item:hover .history-item-actions {
+  opacity: 1;
+}
+
+.delete-btn {
+  background: var(--error-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+.history-item.active .delete-btn {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.history-item.active .delete-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* 콘텐츠 영역 스타일 */
@@ -379,4 +447,3 @@ body {
     flex-direction: column;
   }
 }
-
