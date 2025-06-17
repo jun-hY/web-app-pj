@@ -3,15 +3,12 @@ import { init } from './db/query';
 import path from 'path';
 import { reqReview } from './api/reviewApi';
 import { deleteReview, parseReview, queryReview, saveReview } from './services/reviewService';
-import { error } from 'console';
 
 const PORT: number = 8080;
 const app: Express = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
-app.set('view engine', 'pug')
-app.set('views', '')
 
 app.get('/', async (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, 'index.html'));
