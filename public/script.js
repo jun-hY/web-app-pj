@@ -5,7 +5,7 @@ async function deleteHistoryItem(itemId) {
         // 삭제 확인
         if (confirm("이 히스토리 항목을 삭제하시겠습니까?")) {
             try {
-                const res = await fetch(`http://localhost:8080/deleteReview?id=${itemId}`, {
+                const res = await fetch(`http://localhost:5000/deleteReview?id=${itemId}`, {
                     method: 'delete'
                 })
                 if (!res.ok) {
@@ -13,7 +13,7 @@ async function deleteHistoryItem(itemId) {
                 }
                 historyItem.remove()
                 saveHistoryToStorage()
-                location.href = 'http://localhost:8080/';
+                location.href = 'http://localhost:5000/';
             } catch (err) {
                 console.error(err);
             }
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
         reviewResult.style.opacity = "0.5"
 
         try {
-            const res = await fetch('http://localhost:8080/', {
+            const res = await fetch('http://localhost:5000//', {
                 method: 'POST', // HTTP 메서드
                 headers: {
                     'Content-Type': 'application/json' // 요청 본문 타입
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 reviewResult.style.opacity = "0.5"
 
                 try {
-                    const res = await fetch(`http://localhost:8080/getReview?id=${this.dataset.id}`, {
+                    const res = await fetch(`http://localhost:5000//getReview?id=${this.dataset.id}`, {
                         method: 'GET', // HTTP 메서드
                         headers: {
                             'Content-Type': 'application/json' // 요청 본문 타입

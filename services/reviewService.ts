@@ -3,7 +3,7 @@ import { connectDB } from "../db/query"
 
 export const parseReview = (data: string, origin_code: string): JSON | undefined => {
     try {
-        const jsonData = JSON.parse(data.split('\`\`\`')[1].replace('json\n', ''));
+        const jsonData = JSON.parse(data);
         jsonData.origin_code = origin_code;
         if (jsonData) {
             return jsonData

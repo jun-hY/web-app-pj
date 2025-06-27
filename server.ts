@@ -4,7 +4,7 @@ import path from 'path';
 import { reqReview } from './api/reviewApi';
 import { deleteReview, parseReview, queryReview, saveReview } from './services/reviewService';
 
-const PORT: number = 8080;
+const PORT: number = 5000;
 const app: Express = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
