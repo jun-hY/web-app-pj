@@ -1,7 +1,28 @@
 services:
   code-review:
-    build: .
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
     ports:
-      - "5000:8080"
+      - "8080:8080"
     container_name: code-review
-    image: web-app:latest
+    networks:
+      - review_network
+
+  g4f-slim:
+    container_name: g4f-slim
+    image: hlohaus789/g4f:latest-slim
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-slim
+    volumes:
+      - .g4f/generated_media:/app/generated_media
+      - .g4f/har_and_cookies:/app/har_and_cookies
+    ports:
+      - '1337:8080'
+    networks:
+      - review_network
+
+networks:
+  review_network:
+    driver: bridge
