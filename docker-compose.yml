@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     ports:
-      - "8080:8080"
+      - "5000:5000"
     container_name: code-review
     networks:
       - review_network
@@ -18,8 +18,6 @@ services:
     volumes:
       - .g4f/generated_media:/app/generated_media
       - .g4f/har_and_cookies:/app/har_and_cookies
-    ports:
-      - '1337:8080'
     networks:
       - review_network
 
